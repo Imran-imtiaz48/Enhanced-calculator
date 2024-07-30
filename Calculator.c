@@ -1,71 +1,116 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <string.h>
+#include <ctype.h>
 
-void print_menu() {
-    printf("Select operation:\n");
-    printf(" + for addition\n");
-    printf(" - for subtraction\n");
-    printf(" * for multiplication\n");
-    printf(" / for division\n");
-    printf(" ^ for exponentiation (power)\n");
-    printf(" sqrt for square root\n");
-    printf(" Enter operation: ");
+// Function prototypes
+double evaluate_expression(const char* expr);
+double parse_number(const char** expr);
+double parse_parentheses(const char** expr);
+double parse_factor(const char** expr);
+double parse_term(const char** expr);
+double parse_expression(const char** expr);
+
+double evaluate_expression(const char* expr) {
+    const char* p = expr;
+    return parse_expression(&p);
+}
+
+double parse_number(const char** expr) {
+    while (isspace(**expr)) (*expr)++;
+    double result = strtod(*expr, (char**)expr);
+    return result;
+}
+
+double parse_parentheses(const char** expr) {
+    if (**expr == '(') {
+        (*expr)++;
+        double result = parse_expression(expr);
+        if (**expr == ')') {
+            (*expr)++;
+        } else {
+            printf("Error! Unmatched parentheses.\n");
+            exit(EXIT_FAILURE);
+        }
+        return result;
+    }
+    return parse_number(expr);
+}
+
+double parse_factor(const char** expr) {
+    double result = parse_parentheses(expr);
+    while (**expr == '^') {
+        (*expr)++;
+        double exponent = parse_parentheses(expr);
+        result = pow(result, exponent);
+    }
+    return result;
+}
+
+double parse_term(const char** expr) {
+    double result = parse_factor(expr);
+    while (**expr == '*' || **expr == '/') {
+        char op = **expr;
+        (*expr)++;
+        double operand = parse_factor(expr);
+        if (op == '*') {
+            result *= operand;
+        } else if (op == '/') {
+            if (operand != 0) {
+                result /= operand;
+            } else {
+                printf("Error! Division by zero.\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+    return result;
+}
+
+double parse_expression(const char** expr) {
+    double result = parse_term(expr);
+    while (**expr == '+' || **expr == '-') {
+        char op = **expr;
+        (*expr)++;
+        double operand = parse_term(expr);
+        if (op == '+') {
+            result += operand;
+        } else if (op == '-') {
+            result -= operand;
+        }
+    }
+    return result;
 }
 
 int main() {
-    char operation[10];
-    double num1, num2, result;
+    char input[256];
 
-    // Display menu
-    print_menu();
-    scanf("%s", operation);
+    printf("Enter a mathematical expression (or type 'exit' to quit):\n");
 
-    if (operation[0] == 's' && operation[1] == 'q' && operation[2] == 'r' && operation[3] == 't') {
-        // Square root calculation
-        printf("Enter a number: ");
-        scanf("%lf", &num1);
-        if (num1 < 0) {
-            printf("Error! Negative number for square root.\n");
-        } else {
-            result = sqrt(num1);
-            printf("Result: %.2lf\n", result);
+    while (1) {
+        printf("> ");
+        if (!fgets(input, sizeof(input), stdin)) {
+            printf("Error reading input.\n");
+            break;
         }
-    } else if (operation[0] == '^') {
-        // Exponentiation
-        printf("Enter base and exponent: ");
-        scanf("%lf %lf", &num1, &num2);
-        result = pow(num1, num2);
-        printf("Result: %.2lf\n", result);
-    } else {
-        // Get two numbers from user
-        printf("Enter two numbers: ");
-        scanf("%lf %lf", &num1, &num2);
 
-        // Perform calculation based on operator
-        switch (operation[0]) {
-            case '+':
-                result = num1 + num2;
-                printf("Result: %.2lf\n", result);
-                break;
-            case '-':
-                result = num1 - num2;
-                printf("Result: %.2lf\n", result);
-                break;
-            case '*':
-                result = num1 * num2;
-                printf("Result: %.2lf\n", result);
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                    printf("Result: %.2lf\n", result);
-                } else {
-                    printf("Error! Division by zero.\n");
-                }
-                break;
-            default:
-                printf("Error! Invalid operation.\n");
-                break;
+        // Remove newline character if present
+        input[strcspn(input, "\n")] = 0;
+
+        if (strcmp(input, "exit") == 0) {
+            break;
+        }
+
+        // Evaluate the expression
+        double result;
+        const char* p = input;
+
+        if (*p) {
+            result = evaluate_expression(p);
+            printf("Result: %.2lf\n", result);
+        } else {
+            printf("Error! Empty input.\n");
         }
     }
 
