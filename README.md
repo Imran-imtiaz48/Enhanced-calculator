@@ -1,5 +1,3 @@
-Here’s an updated `README.md` file that includes the new features and improvements for your enhanced calculator program:
-
 ```markdown
 # Enhanced Calculator Program
 
