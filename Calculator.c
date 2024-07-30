@@ -4,6 +4,25 @@
 #include <string.h>
 #include <ctype.h>
 
+// Function prototypes
+void print_menu();
+double evaluate_expression(const char* expr);
+double parse_number(const char** expr);
+double parse_parentheses(const char** expr);
+double parse_factor(const char** expr);
+double parse_term(const char** expr);
+double parse_expression(const char** expr);
+double solve_linear_equation(double a, double b);
+void solve_quadratic_equation(double a, double b, double c);
+double evaluate_trigonometric_function(const char* func, double x);
+void convert_degrees_radians();
+void handle_constants(double* num1);
+void calculate_statistics();
+void matrix_operations();
+void memory_operations();
+
+double memory = 0; // Memory variable
+
 void print_menu() {
     printf("Select operation:\n");
     printf(" + for addition\n");
@@ -20,18 +39,16 @@ void print_menu() {
     printf(" atan for arctangent\n");
     printf(" eq for linear equation (ax + b = 0)\n");
     printf(" qeq for quadratic equation (ax^2 + bx + c = 0)\n");
+    printf(" deg2rad for degrees to radians conversion\n");
+    printf(" rad2deg for radians to degrees conversion\n");
+    printf(" mean for mean calculation\n");
+    printf(" median for median calculation\n");
+    printf(" mode for mode calculation\n");
+    printf(" stddev for standard deviation calculation\n");
+    printf(" matrix for matrix operations\n");
+    printf(" mem for memory operations\n");
     printf(" Enter operation: ");
 }
-
-double evaluate_expression(const char* expr);
-double parse_number(const char** expr);
-double parse_parentheses(const char** expr);
-double parse_factor(const char** expr);
-double parse_term(const char** expr);
-double parse_expression(const char** expr);
-double solve_linear_equation(double a, double b);
-void solve_quadratic_equation(double a, double b, double c);
-double evaluate_trigonometric_function(const char* func, double x);
 
 double evaluate_expression(const char* expr) {
     const char* p = expr;
@@ -144,6 +161,92 @@ double evaluate_trigonometric_function(const char* func, double x) {
     exit(EXIT_FAILURE);
 }
 
+void convert_degrees_radians() {
+    char choice;
+    double value;
+    printf("Convert from (d)egrees to radians or (r)adians to degrees? ");
+    scanf(" %c", &choice);
+    if (choice == 'd') {
+        printf("Enter degrees: ");
+        scanf("%lf", &value);
+        printf("Radians: %.2lf\n", value * M_PI / 180);
+    } else if (choice == 'r') {
+        printf("Enter radians: ");
+        scanf("%lf", &value);
+        printf("Degrees: %.2lf\n", value * 180 / M_PI);
+    } else {
+        printf("Invalid choice.\n");
+    }
+}
+
+void handle_constants(double* num1) {
+    char choice;
+    printf("Enter (p)i for pi or (e) for e: ");
+    scanf(" %c", &choice);
+    if (choice == 'p') {
+        *num1 = M_PI;
+    } else if (choice == 'e') {
+        *num1 = M_E;
+    } else {
+        printf("Invalid choice.\n");
+    }
+}
+
+void calculate_statistics() {
+    int n, i;
+    double sum = 0, mean, median;
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+    double* arr = (double*)malloc(n * sizeof(double));
+    if (!arr) {
+        printf("Memory allocation failed.\n");
+        return;
+    }
+
+    printf("Enter elements:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%lf", &arr[i]);
+        sum += arr[i];
+    }
+    
+    // Compute mean
+    mean = sum / n;
+    printf("Mean: %.2lf\n", mean);
+
+    // Compute median
+    qsort(arr, n, sizeof(double), (int(*)(const void*, const void*))strcmp);
+    if (n % 2 == 0) {
+        median = (arr[n / 2 - 1] + arr[n / 2]) / 2;
+    } else {
+        median = arr[n / 2];
+    }
+    printf("Median: %.2lf\n", median);
+
+    free(arr);
+}
+
+void matrix_operations() {
+    // Implement matrix operations here
+    printf("Matrix operations not implemented yet.\n");
+}
+
+void memory_operations() {
+    char choice;
+    double value;
+    printf("Enter (s)ave to memory or (r)ecall from memory: ");
+    scanf(" %c", &choice);
+    if (choice == 's') {
+        printf("Enter value to save: ");
+        scanf("%lf", &value);
+        memory = value;
+        printf("Value saved to memory.\n");
+    } else if (choice == 'r') {
+        printf("Value from memory: %.2lf\n", memory);
+    } else {
+        printf("Invalid choice.\n");
+    }
+}
+
 int main() {
     char input[256];
     char operation[10];
@@ -194,6 +297,21 @@ int main() {
             scanf("%lf", &num1);
             result = evaluate_trigonometric_function(operation, num1);
             printf("Result: %.2lf\n", result);
+        } else if (strcmp(operation, "deg2rad") == 0 ||
+                   strcmp(operation, "rad2deg") == 0) {
+            convert_degrees_radians();
+        } else if (strcmp(operation, "const") == 0) {
+            handle_constants(&num1);
+            printf("Constant value: %.2lf\n", num1);
+        } else if (strcmp(operation, "mean") == 0 ||
+                   strcmp(operation, "median") == 0 ||
+                   strcmp(operation, "mode") == 0 ||
+                   strcmp(operation, "stddev") == 0) {
+            calculate_statistics();
+        } else if (strcmp(operation, "matrix") == 0) {
+            matrix_operations();
+        } else if (strcmp(operation, "mem") == 0) {
+            memory_operations();
         } else {
             // Evaluate expression
             const char* p = input;
