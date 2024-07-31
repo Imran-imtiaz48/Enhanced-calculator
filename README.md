@@ -1,124 +1,147 @@
-```markdown
-# Enhanced Calculator Program
+## Enhanced Calculator Program Documentation
 
-## Overview
+### Overview
+This calculator program supports a wide range of mathematical operations, including basic arithmetic, trigonometric functions, logarithmic functions, statistical calculations, and more. It also supports solving linear and quadratic equations, converting between degrees and radians, and matrix operations.
 
-This is an enhanced calculator program written in C. It supports a wide range of mathematical operations, including basic arithmetic, advanced mathematical functions, and statistical calculations. The program provides error handling for invalid operations and division by zero.
+### Features
+- **Basic Arithmetic**: Addition, subtraction, multiplication, division, and exponentiation.
+- **Square Root Calculation**: `sqrt` for square root.
+- **Trigonometric Functions**: `sin`, `cos`, `tan`, `asin`, `acos`, `atan`.
+- **Logarithmic Functions**: `log` for natural logarithm, `log10` for base-10 logarithm.
+- **Factorial Calculation**: `factorial` for calculating the factorial of an integer.
+- **Modulo Operation**: `mod` for modulo operation.
+- **Prime Check**: `prime` for checking if a number is prime.
+- **Linear Equation Solving**: `eq` for solving linear equations of the form `ax + b = 0`.
+- **Quadratic Equation Solving**: `qeq` for solving quadratic equations of the form `ax^2 + bx + c = 0`.
+- **Degree-Radian Conversion**: `deg2rad` and `rad2deg`.
+- **Statistical Calculations**: Mean (`mean`), median (`median`), mode (`mode`), standard deviation (`stddev`).
+- **Matrix Operations**: `matrix` (not implemented yet).
+- **Memory Operations**: `mem` for saving and recalling values from memory.
 
-## Features
+### Usage
+#### Main Menu
+- The program displays a menu with available operations.
+- Enter the corresponding operation keyword or symbol to perform a specific operation.
+- To exit the program, type `exit`.
 
-- **Basic Arithmetic**:
-  - **Addition (`+`)**: Adds two numbers.
-  - **Subtraction (`-`)**: Subtracts the second number from the first.
-  - **Multiplication (`*`)**: Multiplies two numbers.
-  - **Division (`/`)**: Divides the first number by the second. Handles division by zero.
-  - **Exponentiation (`^`)**: Calculates the power of a number (base raised to exponent).
-  - **Square Root (`sqrt`)**: Calculates the square root of a non-negative number.
+#### Basic Arithmetic and Expressions
+- Supports expressions involving addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), and exponentiation (`^`).
+- Expressions can be entered directly and will be evaluated.
 
-- **Advanced Mathematical Functions**:
-  - **Trigonometric Functions**:
-    - `sin`, `cos`, `tan`: Sine, cosine, and tangent.
-    - `asin`, `acos`, `atan`: Arcsine, arccosine, and arctangent.
-  - **Linear Equation Solver (`eq`)**: Solves linear equations of the form `ax + b = 0`.
-  - **Quadratic Equation Solver (`qeq`)**: Solves quadratic equations of the form `ax^2 + bx + c = 0`.
+#### Square Root
+- Operation: `sqrt`
+- Enter a number to calculate its square root.
 
-- **Additional Features**:
-  - **Degree/Radian Conversion (`deg2rad`, `rad2deg`)**: Converts between degrees and radians.
-  - **Constants Handling (`const`)**: Handles mathematical constants like π and e.
-  - **Statistics**:
-    - `mean`: Calculates the mean of a set of numbers.
-    - `median`: Calculates the median of a set of numbers.
-    - `mode`: Calculates the mode of a set of numbers.
-    - `stddev`: Calculates the standard deviation of a set of numbers.
-  - **Matrix Operations (`matrix`)**: Performs matrix operations (e.g., addition, multiplication). (Implementation needed)
-  - **Memory Operations (`mem`)**: Saves and recalls values to/from memory.
+#### Trigonometric Functions
+- Operations: `sin`, `cos`, `tan`, `asin`, `acos`, `atan`
+- Enter the angle in radians to calculate the corresponding trigonometric value.
 
-## Prerequisites
+#### Logarithmic Functions
+- Operations: `log` (natural logarithm), `log10` (base-10 logarithm)
+- Enter a number to calculate its logarithm.
 
-To compile and run this program, you need:
+#### Factorial Calculation
+- Operation: `factorial`
+- Enter an integer to calculate its factorial.
 
-- A C compiler (e.g., GCC)
-- The `math.h` library for mathematical functions
+#### Modulo Operation
+- Operation: `mod`
+- Enter two integers to calculate the modulo (remainder) of their division.
 
-## Compilation
+#### Prime Check
+- Operation: `prime`
+- Enter an integer to check if it is a prime number.
 
-To compile the program using GCC, run the following command in your terminal:
+#### Linear Equation Solving
+- Operation: `eq`
+- Enter the coefficients `a` and `b` for the linear equation `ax + b = 0` to find the value of `x`.
 
-```bash
-gcc -o calculator calculator.c -lm
+#### Quadratic Equation Solving
+- Operation: `qeq`
+- Enter the coefficients `a`, `b`, and `c` for the quadratic equation `ax^2 + bx + c = 0` to find the roots.
+
+#### Degree-Radian Conversion
+- Operations: `deg2rad`, `rad2deg`
+- Convert degrees to radians or radians to degrees by entering the value.
+
+#### Statistical Calculations
+- Operations: `mean`, `median`, `mode`, `stddev`
+- Enter the number of elements and their values to calculate the respective statistical measure.
+
+#### Matrix Operations
+- Operation: `matrix`
+- Matrix operations are not yet implemented.
+
+#### Memory Operations
+- Operation: `mem`
+- Save a value to memory or recall a value from memory.
+
+### Example Usage
+#### Basic Arithmetic
+```
+> 3 + 4 * 2 / (1 - 5) ^ 2
+Result: 3.50
 ```
 
-This command compiles `calculator.c` into an executable named `calculator`, linking the `math` library (`-lm`) required for mathematical operations.
-
-## Execution
-
-After compilation, run the executable with:
-
-### On Windows:
-```bash
-calculator.exe
+#### Trigonometric Function
+```
+> sin
+Enter the angle (in radians): 1.5708
+Result: 1.00
 ```
 
-### On macOS or Linux:
-```bash
-./calculator
+#### Logarithmic Function
+```
+> log
+Enter a number: 2.7183
+Result: 1.00
 ```
 
-## Usage
-
-1. **Start the Program**: Execute the compiled program.
-2. **Select Operation**: Choose an operation by entering the corresponding symbol or keyword:
-   - `+` for addition
-   - `-` for subtraction
-   - `*` for multiplication
-   - `/` for division
-   - `^` for exponentiation
-   - `sqrt` for square root
-   - `sin` for sine
-   - `cos` for cosine
-   - `tan` for tangent
-   - `asin` for arcsine
-   - `acos` for arccosine
-   - `atan` for arctangent
-   - `eq` for linear equation (ax + b = 0)
-   - `qeq` for quadratic equation (ax^2 + bx + c = 0)
-   - `deg2rad` for degrees to radians conversion
-   - `rad2deg` for radians to degrees conversion
-   - `const` for constants (π or e)
-   - `mean` for mean calculation
-   - `median` for median calculation
-   - `mode` for mode calculation
-   - `stddev` for standard deviation calculation
-   - `matrix` for matrix operations
-   - `mem` for memory operations
-3. **Input Numbers**: Follow the prompts to enter the numbers required for the selected operation.
-4. **View Result**: The program will display the result of the operation.
-
-## Example
-
+#### Factorial
 ```
-Select operation:
- + for addition
- - for subtraction
- * for multiplication
- / for division
- ^ for exponentiation (power)
- sqrt for square root
- Enter operation: +
-Enter two numbers: 10 5
-Result: 15.00
+> factorial
+Enter an integer: 5
+Result: 120.00
 ```
 
-## Error Handling
-
-- **Division by Zero**: If the operation is division and the second number is zero, the program will output an error message.
-- **Invalid Operations**: If an unsupported operation is entered, the program will notify the user of an invalid operation.
-- **Negative Square Root**: If a negative number is provided for the square root operation, an error message will be displayed.
-
-## License
-
-This program is provided as-is, free for personal or educational use. No warranties or guarantees are provided.
-
+#### Modulo Operation
+```
+> mod
+Enter two integers: 10 3
+Result: 1.00
 ```
 
-Feel free to adjust or expand on any sections based on additional features or changes!
+#### Prime Check
+```
+> prime
+Enter an integer: 7
+Result: 7 is a prime number.
+```
+
+#### Linear Equation
+```
+> eq
+Enter coefficients a and b for ax + b = 0: 2 -4
+Result: 2.00
+```
+
+#### Quadratic Equation
+```
+> qeq
+Enter coefficients a, b, and c for ax^2 + bx + c = 0: 1 -3 2
+Roots: 2.00 and 1.00
+```
+
+#### Degree-Radian Conversion
+```
+> deg2rad
+Enter degrees: 180
+Radians: 3.14
+```
+
+### Notes
+- The program handles both floating-point and integer inputs.
+- Error messages are displayed for invalid operations or inputs, such as division by zero or invalid function names.
+- Memory operations allow for saving and recalling values for later use.
+
+This documentation covers all features and usage scenarios for the enhanced calculator program. Feel free to modify and expand it as needed!
