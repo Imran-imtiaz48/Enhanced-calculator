@@ -20,6 +20,9 @@ void handle_constants(double* num1);
 void calculate_statistics();
 void matrix_operations();
 void memory_operations();
+double factorial(int n);
+double evaluate_logarithmic_function(const char* func, double x);
+int is_prime(int num);
 
 double memory = 0; // Memory variable
 
@@ -37,6 +40,11 @@ void print_menu() {
     printf(" asin for arcsine\n");
     printf(" acos for arccosine\n");
     printf(" atan for arctangent\n");
+    printf(" log for natural logarithm\n");
+    printf(" log10 for base-10 logarithm\n");
+    printf(" factorial for factorial\n");
+    printf(" mod for modulo\n");
+    printf(" prime for prime check\n");
     printf(" eq for linear equation (ax + b = 0)\n");
     printf(" qeq for quadratic equation (ax^2 + bx + c = 0)\n");
     printf(" deg2rad for degrees to radians conversion\n");
@@ -161,6 +169,14 @@ double evaluate_trigonometric_function(const char* func, double x) {
     exit(EXIT_FAILURE);
 }
 
+double evaluate_logarithmic_function(const char* func, double x) {
+    if (strcmp(func, "log") == 0) return log(x);
+    if (strcmp(func, "log10") == 0) return log10(x);
+
+    printf("Error! Invalid logarithmic function.\n");
+    exit(EXIT_FAILURE);
+}
+
 void convert_degrees_radians() {
     char choice;
     double value;
@@ -247,6 +263,23 @@ void memory_operations() {
     }
 }
 
+double factorial(int n) {
+    if (n < 0) {
+        printf("Error! Factorial of negative number.\n");
+        exit(EXIT_FAILURE);
+    }
+    if (n == 0 || n == 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int is_prime(int num) {
+    if (num <= 1) return 0;
+    for (int i = 2; i <= sqrt(num); i++) {
+        if (num % i == 0) return 0;
+    }
+    return 1;
+}
+
 int main() {
     char input[256];
     char operation[10];
@@ -312,12 +345,40 @@ int main() {
             matrix_operations();
         } else if (strcmp(operation, "mem") == 0) {
             memory_operations();
+        } else if (strcmp(operation, "log") == 0 ||
+                   strcmp(operation, "log10") == 0) {
+            printf("Enter a number: ");
+            scanf("%lf", &num1);
+            result = evaluate_logarithmic_function(operation, num1);
+            printf("Result: %.2lf\n", result);
+        } else if (strcmp(operation, "factorial") == 0) {
+            printf("Enter an integer: ");
+            scanf("%lf", &num1);
+            result = factorial((int)num1);
+            printf("Result: %.2lf\n", result);
+        } else if (strcmp(operation, "mod") == 0) {
+            printf("Enter two integers: ");
+            scanf("%lf %lf", &num1, &num2);
+            result = (int)num1 % (int)num2;
+            printf("Result: %.2lf\n", result);
+        } else if (strcmp(operation, "prime") == 0) {
+            printf("Enter an integer: ");
+            scanf("%lf", &num1);
+            int isPrime = is_prime((int)num1);
+            if (isPrime) {
+                printf("Result: %.0lf is a prime number.\n", num1);
+            } else {
+                printf("Result: %.0lf is not a prime number.\n", num1);
+            }
         } else {
             // Evaluate expression
             const char* p = input;
             result = evaluate_expression(p);
             printf("Result: %.2lf\n", result);
         }
+
+        // Clear the input buffer
+        while (getchar() != '\n');
     }
 
     return 0;
