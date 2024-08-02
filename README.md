@@ -1,6 +1,6 @@
 ## Enhanced Calculator Program Documentation
 
-### Overviews
+### Overview
 This calculator program supports a wide range of mathematical operations, including basic arithmetic, trigonometric functions, logarithmic functions, statistical calculations, and more. It also supports solving linear and quadratic equations, converting between degrees and radians, and matrix operations.
 
 ### Features
