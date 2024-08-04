@@ -6,8 +6,13 @@ class Calculator(tk.Tk):
         super().__init__()
 
         self.title("Responsive Calculator")
+<<<<<<< HEAD
         self.geometry("350x600")  # Increased height for extra buttons
         self.resizable(False, False)
+=======
+        self.geometry("350x500")  
+        self.resizable(False, False)  
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
 
         self.expression = ""
         self.memory = 0
@@ -16,7 +21,7 @@ class Calculator(tk.Tk):
         self.create_widgets()
 
     def create_widgets(self):
-        # Display Frame
+        
         self.display_frame = tk.Frame(self, bg="#2c3e50")
         self.display_frame.grid(row=0, column=0, columnspan=4, sticky="nsew")
 
@@ -25,20 +30,24 @@ class Calculator(tk.Tk):
 
         self.total_label, self.label = self.create_display_labels()
 
-        # Button Frame
+       
         self.button_frame = tk.Frame(self)
         self.button_frame.grid(row=1, column=0, columnspan=4, sticky="nsew")
 
         self.create_buttons()
 
-        # Configure grid weights
+       
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
+<<<<<<< HEAD
         for i in range(10):  # Updated to reflect the number of button rows
+=======
+        for i in range(9): 
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
             self.button_frame.grid_rowconfigure(i, weight=1)
-        for i in range(4):  # Updated to reflect the number of button columns
+        for i in range(4):  
             self.button_frame.grid_columnconfigure(i, weight=1)
 
         self.bind_keys()
@@ -84,6 +93,7 @@ class Calculator(tk.Tk):
                     activebackground=button_colors['highlight'],
                     command=lambda x=button: self.on_button_click(x)
                 )
+<<<<<<< HEAD
                 button_obj.grid(row=r, column=c, sticky="nsew", padx=1, pady=1)
 
     def bind_keys(self):
@@ -97,6 +107,18 @@ class Calculator(tk.Tk):
         self.bind('<1>', lambda event: self.apply_function(lambda x: 1 / x))  # Inverse key
         self.bind('<d>', lambda event: self.apply_function(math.degrees))  # Degree conversion
         self.bind('<r>', lambda event: self.apply_function(math.radians))  # Radian conversion
+=======
+                button_obj.grid(row=r, column=c, sticky="nsew", padx=1, pady=1)  
+
+    def bind_keys(self):
+      
+        self.bind('<KeyPress>', self.on_key_press)
+        self.bind('<Return>', lambda event: self.evaluate())  
+        self.bind('<BackSpace>', lambda event: self.clear_entry())  
+        self.bind('<c>', lambda event: self.clear()) 
+        self.bind('<percent>', lambda event: self.apply_function(lambda x: x / 100))  
+        self.bind('<q>', lambda event: self.quit())  
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
 
     def on_key_press(self, event):
         key = event.char
@@ -104,21 +126,36 @@ class Calculator(tk.Tk):
             self.append_value(key)
         elif key in '+-*/':
             self.append_operator(key)
+<<<<<<< HEAD
         elif key == '\r':
             self.evaluate()
         elif key == '\x08':
+=======
+        elif key == '\r': 
+            self.evaluate()
+        elif key == '\x08': 
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
             self.clear_entry()
         elif key == 'c' or key == 'C':
             self.clear()
         elif key == '%':
             self.apply_function(lambda x: x / 100)
+<<<<<<< HEAD
         elif key == 'p':
             self.append_value(math.pi)
         elif key == '^':
+=======
+        elif key == 'q':
+            self.quit()
+        elif key == 'p': 
+            self.append_value(math.pi)
+        elif key == '^':  
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
             if event.keysym == '2':
                 self.apply_function(lambda x: x ** 2)
             elif event.keysym == '3':
                 self.apply_function(lambda x: x ** 3)
+<<<<<<< HEAD
         elif key == 'r':
             self.apply_function(math.sqrt)
         elif key == 'l':
@@ -140,6 +177,29 @@ class Calculator(tk.Tk):
         elif key == 'h':
             self.show_history()
         elif key == 'q':
+=======
+        elif key == 'r':  
+            self.apply_function(math.sqrt)
+        elif key == 'l':  
+            self.apply_function(math.log10)
+        elif key == 'e': 
+            self.apply_function(math.exp)
+        elif key == 's':  
+            self.apply_function(math.sin)
+        elif key == 'c': 
+            self.apply_function(math.cos)
+        elif key == 't':  
+            self.apply_function(math.tan)
+        elif key == 'm':  
+            self.memory += self.get_value()
+        elif key == 'M': 
+            self.current_expression = str(self.memory)
+        elif key == 'M' and event.keysym == 'minus': 
+            self.memory -= self.get_value()
+        elif key == 'h': 
+            self.show_history()
+        elif key == 'q':  
+>>>>>>> 9ed66d9f42674224f00722e66535b6ad2c084cb8
             self.quit()
         elif key == '!':
             self.apply_function(math.factorial)  # Factorial key

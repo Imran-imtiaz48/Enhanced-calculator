@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-// Function prototypes
+
 void print_menu();
 double evaluate_expression(const char* expr);
 double parse_number(const char** expr);
@@ -24,7 +24,7 @@ double factorial(int n);
 double evaluate_logarithmic_function(const char* func, double x);
 int is_prime(int num);
 
-double memory = 0; // Memory variable
+double memory = 0; 
 
 void print_menu() {
     printf("Select operation:\n");
@@ -225,11 +225,11 @@ void calculate_statistics() {
         sum += arr[i];
     }
     
-    // Compute mean
+   
     mean = sum / n;
     printf("Mean: %.2lf\n", mean);
 
-    // Compute median
+  
     qsort(arr, n, sizeof(double), (int(*)(const void*, const void*))strcmp);
     if (n % 2 == 0) {
         median = (arr[n / 2 - 1] + arr[n / 2]) / 2;
@@ -242,7 +242,7 @@ void calculate_statistics() {
 }
 
 void matrix_operations() {
-    // Implement matrix operations here
+   
     printf("Matrix operations not implemented yet.\n");
 }
 
@@ -294,10 +294,10 @@ int main() {
             break;
         }
 
-        // Remove newline character if present
+        
         input[strcspn(input, "\n")] = 0;
 
-        // Parse operation
+        
         sscanf(input, "%s", operation);
 
         if (strcmp(operation, "exit") == 0) {
@@ -371,13 +371,13 @@ int main() {
                 printf("Result: %.0lf is not a prime number.\n", num1);
             }
         } else {
-            // Evaluate expression
+            
             const char* p = input;
             result = evaluate_expression(p);
             printf("Result: %.2lf\n", result);
         }
 
-        // Clear the input buffer
+       
         while (getchar() != '\n');
     }
 
