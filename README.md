@@ -1,7 +1,7 @@
 ## Calculator Program Documentation
 
 ### Overview
-This calculator program support a wide range of mathematical operations, which include basic arithmetic, trigonometric functions, logarithmic functions, statistical calculations, and more. It also supports solving linear and quadratic equations, converting between degrees and radians, and matrix operations.
+The calculator program support a wide range of mathematical operations, which include basic arithmetic, trigonometric functions, logarithmic functions, statistical calculations, and more. It also supports solving linear and quadratic equations, converting between degrees and radians, and matrix operations.
 
 ### Features
 - **Basic Arithmetic**: Addition, subtraction, multiplication, division, and exponentiation.
