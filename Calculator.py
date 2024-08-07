@@ -310,7 +310,7 @@ class Calculator(tk.Tk):
         with open("history.txt", "w") as file:
             for entry in self.history:
                 file.write(f"{entry}\n")
-        messagebox.showinfo("Save History", "History saved successfully!")
+        messagebox.showinfo("Save History", "History save successfully!")
 
     def load_history(self):
         try:
