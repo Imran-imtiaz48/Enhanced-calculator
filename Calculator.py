@@ -94,10 +94,10 @@ class Calculator(tk.Tk):
         self.bind('<c>', lambda event: self.clear())
         self.bind('<percent>', lambda event: self.apply_function(lambda x: x / 100))
         self.bind('<q>', lambda event: self.quit())
-        self.bind('<exclam>', lambda event: self.apply_function(math.factorial))  # Factorial key
-        self.bind('<1>', lambda event: self.apply_function(lambda x: 1 / x))  # Inverse key
-        self.bind('<d>', lambda event: self.apply_function(math.degrees))  # Degree conversion
-        self.bind('<r>', lambda event: self.apply_function(math.radians))  # Radian conversion
+        self.bind('<exclam>', lambda event: self.apply_function(math.factorial))  
+        self.bind('<1>', lambda event: self.apply_function(lambda x: 1 / x))  
+        self.bind('<d>', lambda event: self.apply_function(math.degrees)) 
+        self.bind('<r>', lambda event: self.apply_function(math.radians))  
 
     def on_key_press(self, event):
         key = event.char
