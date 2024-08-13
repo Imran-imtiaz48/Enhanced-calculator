@@ -325,6 +325,6 @@ class Calculator(tk.Tk):
         self.history = []
         messagebox.showinfo("Clear History", "History cleared!")
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     calculator = Calculator()
     calculator.mainloop()
