@@ -249,6 +249,6 @@ class Calculator(tk.Tk):
         self.bind('<c>', lambda event: self.clear())
         self.bind('<percent>', lambda event: self.apply_function(lambda x: x / 100))
         self.bind('<q>', lambda event: self.quit())
-        self.bind('<exclam>', lambda event: self.apply_function(math.factorial))  # Factorial key
+        self.bind('<exclam>', lambda event: self.apply_function(math.factorial))  
         self.bind('<1>', lambda event: self
 
